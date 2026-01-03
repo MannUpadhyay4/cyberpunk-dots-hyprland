@@ -1,0 +1,170 @@
+;; ════════════════════════════════════════════════════════════════
+;;  🔥 CYBERPUNK 2077 EWW BAR - SAMURAI NEURAL INTERFACE HUD 🔥
+;;     Save as ~/.config/eww/eww.yuck
+;; ════════════════════════════════════════════════════════════════
+
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;;                        🦾 SYSTEM VITALS
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+;; Health (RAM Usage)
+(defpoll health-percent :interval "2s" 
+  `free | grep Mem | awk '{printf "%.0f", ($3/$2)*100}'`)
+
+;; Stamina (CPU Usage) 
+(defpoll stamina-percent :interval "2s"
+  `top -bn1 | grep "Cpu(s)" | awk '{print $2}' | sed 's/%us,//'`)
+
+;; Neural Implant Temp (CPU temp)
+(defpoll neural-temp :interval "3s"
+  `sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//;s/°C//' || echo "42"`)
+
+;; Eddies (Disk Usage)
+(defpoll eddies-percent :interval "10s"
+  `df -h / | awk 'NR==2{print $5}' | sed 's/%//'`)
+
+;; Street Cred (Uptime in hours)
+(defpoll street-cred :interval "60s"
+  `uptime -p | sed 's/up //;s/ hours*//;s/ minutes*//;s/,.*$//' | awk '{print $1 "h"}'`)
+
+;; Net Connection
+(defpoll net-status :interval "5s"
+  `ping -c 1 8.8.8.8 > /dev/null 2>&1 && echo "ONLINE" || echo "OFFLINE"`)
+
+;; Audio Level
+(defpoll audio-level :interval "1s"
+  `pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | sed 's/%//'`)
+
+;; Current Workspace (Hyprland)
+(defpoll current-workspace :interval "1s"
+  `hyprctl activewindow -j | jq -r '.workspace.name' 2>/dev/null || echo "1"`)
+
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;;                      🌃 TIME & DATE WIDGETS  
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+(defpoll time-corpo :interval "1s"
+  `date '+%H:%M'`)
+
+(defpoll date-corpo :interval "60s"  
+  `date '+2077.%m.%d'`)
+
+(defpoll day-corpo :interval "60s"
+  `date '+%A'`)
+
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;;                       🎨 UI COMPONENTS
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+;; Health Bar Component
+(defwidget health-bar []
+  (box :class "health-container" :space-evenly false :spacing 8
+    (label :class "health-icon" :text "🩸")
+    (box :class "health-bar-bg"
+      (box :class "health-bar-fill" 
+           :style "width: ${health-percent}%"))
+    (label :class "health-text" :text "${health-percent}%")))
+
+;; Stamina Bar Component  
+(defwidget stamina-bar []
+  (box :class "stamina-container" :space-evenly false :spacing 8
+    (label :class "stamina-icon" :text "⚡")
+    (box :class "stamina-bar-bg" 
+      (box :class "stamina-bar-fill"
+           :style "width: ${100 - stamina-percent}%"))
+    (label :class "stamina-text" :text "${100 - stamina-percent}%")))
+
+;; Neural Implant Status
+(defwidget neural-status []
+  (box :class "neural-container" :space-evenly false :spacing 8
+    (label :class "neural-icon" :text "🧠")
+    (label :class "neural-temp" 
+           :text "${neural-temp}°C"
+           :style "color: ${neural-temp > 70 ? '#ff0066' : '#00ffaa'}")))
+
+;; Eddies (Money/Storage)
+(defwidget eddies-display []
+  (box :class "eddies-container" :space-evenly false :spacing 8
+    (label :class "eddies-icon" :text "💰")
+    (label :class "eddies-text" :text "${eddies-percent}% USED")))
+
+;; Street Cred
+(defwidget street-cred-display []
+  (box :class "street-cred-container" :space-evenly false :spacing 8
+    (label :class "street-cred-icon" :text "🏆")
+    (label :class "street-cred-text" :text "LVL ${street-cred}")))
+
+;; Net Status
+(defwidget net-display []
+  (box :class "net-container" :space-evenly false :spacing 8
+    (label :class "net-icon" 
+           :text "${net-status == 'ONLINE' ? '🌐' : '📡'}")
+    (label :class "net-text" 
+           :text "${net-status}"
+           :style "color: ${net-status == 'ONLINE' ? '#00ffaa' : '#ff0066'}")))
+
+;; Audio Control
+(defwidget audio-display []
+  (box :class "audio-container" :space-evenly false :spacing 8
+    (label :class "audio-icon" :text "🔊")
+    (box :class "audio-bar-bg"
+      (box :class "audio-bar-fill"
+           :style "width: ${audio-level}%"))
+    (label :class "audio-text" :text "${audio-level}%")))
+
+;; Workspace Indicator
+(defwidget workspace-display []
+  (box :class "workspace-container" :space-evenly false :spacing 8
+    (label :class "workspace-icon" :text "🏢")
+    (label :class "workspace-text" :text "SECTOR ${current-workspace}")))
+
+;; Time Display (Main HUD)
+(defwidget time-display []
+  (box :class "time-container" :orientation "v" :space-evenly false
+    (label :class "time-main" :text time-corpo)
+    (label :class "date-main" :text date-corpo)
+    (label :class "day-main" :text day-corpo)))
+
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;;                        🚀 MAIN BAR LAYOUT
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+(defwidget samurai-bar []
+  (centerbox :class "main-bar"
+    
+    ;; Left side - System vitals
+    (box :class "left-modules" :space-evenly false :spacing 15 :halign "start"
+      (health-bar)
+      (stamina-bar)
+      (neural-status))
+      
+    ;; Center - Time & Workspace
+    (box :class "center-modules" :space-evenly false :spacing 20
+      (workspace-display)
+      (time-display))
+      
+    ;; Right side - Resources & Status  
+    (box :class "right-modules" :space-evenly false :spacing 15 :halign "end"
+      (eddies-display)
+      (street-cred-display)
+      (audio-display)
+      (net-display))))
+
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;;                          🎯 MAIN WINDOW
+;; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+(defwindow samurai-hud
+  :monitor 0
+  :geometry (geometry 
+    :x "0%"
+    :y "0%"  
+    :width "100%"
+    :height "35px"
+    :anchor "top center")
+  :stacking "fg"
+  :reserve (struts :distance "35px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  
+  (samurai-bar))

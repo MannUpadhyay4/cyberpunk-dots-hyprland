@@ -1,0 +1,11 @@
+[repository]
+name = "ipc-closewindowv2"
+authors = ["zacoons"]
+
+[ipc-closewindowv2]
+description = "Adds a new IPC event with more info about windows that are being closed."
+output = "build/ipc-closewindowv2.so"
+build = [
+    "cmake -B build && cmake --build build"
+]
+

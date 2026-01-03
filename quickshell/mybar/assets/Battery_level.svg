@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 630">
+  <polygon 
+    points="60,120 500,140 500,580 140,580 60,480" 
+    fill="none" 
+    stroke="#00ffff" 
+    stroke-width="10" 
+    stroke-opacity="0.3"/>
+  <polygon 
+    points="100,80 540,100 540,540 180,540 100,440" 
+    fill="none" 
+    stroke="#00ffff" 
+    stroke-width="18" 
+    stroke-opacity="1"/>
+</svg>

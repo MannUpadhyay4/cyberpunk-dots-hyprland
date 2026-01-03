@@ -1,0 +1,7 @@
+/home/mann/.config/hypr/plugins/build/CMakeFiles/ipc-closewindowv2.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/edit_cache.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/rebuild_cache.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/list_install_components.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/install.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/install/local.dir
+/home/mann/.config/hypr/plugins/build/CMakeFiles/install/strip.dir

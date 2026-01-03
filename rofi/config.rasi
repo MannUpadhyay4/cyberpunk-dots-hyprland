@@ -1,0 +1,219 @@
+configuration {
+    modi: "window,drun,filebrowser";
+    show-icons: false;
+    sort: true;
+    matching: "fuzzy";
+    display-drun: "A";
+    display-window: "W";
+    display-filebrowser: "F";
+    kb-mode-next: "Control+Tab";
+    kb-mode-previous: "Control+Shift+Tab";
+    kb-mode-complete: "";
+}
+@theme "/dev/null"
+*{
+    bg: #531f21a5;
+    fg: #76f3fc;
+    bgAlt: #511c1ecc;
+    neon: #FF6E5A;
+    accent: #76f3fc;
+    yellow: #FCE77D;
+    darkCyan: #001a1acc;
+    darkRed: #1a0000cc;
+    font: "Orbitron 12";
+    text-color: @fg;
+    background-color: @bg;
+}
+window {
+    width: 550px;
+    height: 700px;
+    border: 2px solid;
+    padding: 12px;
+    background-color: @bg;
+    border-radius: 0px;
+}
+mainbox {
+    children: [textbox-title-bar, player-section-box, entry, listview, mode-switcher];
+    spacing: 8px;
+}
+textbox-title-bar {
+    content: "RADIOPORT";
+    text-color: @accent;
+    font: "Orbitron Bold 11";
+    padding: 2px 0px;
+    expand: false;
+    margin: 0px;
+    border: 1px solid;
+    border-color: @neon;
+}
+entry {
+    placeholder: "Search stations...";
+    text-color: #76f5ffaa;
+    placeholder-color: #76f5ffaa;
+    background-color: @bg;
+    border: 1px solid;
+    border-color: @accent;
+    padding: 8px;
+    font: "Orbitron 12";
+    expand: false;
+}
+player-section-box {
+    orientation: horizontal;
+    spacing: 8px;
+    children: [icon-album-cover, song-info-box];
+    expand: false;
+}
+icon-album-cover {
+    filename: "~/.config/rofi/assets/jhonny.png";
+    size: 100px;
+    background-color: #1a1a1acc;
+    border: 2px solid;
+    border-color: @neon;
+    expand: false;
+}
+song-info-box {
+    orientation: vertical;
+    spacing: 4px;
+    padding: 8px;
+    background-color: @transparent;
+    border: 1px solid;
+    border-color: @neon;
+    children: [textbox-track-title, spacer-box, volume-row-box];
+}
+textbox-track-title {
+    content: "NO TRACK PLAYING";
+    text-color: @neon;
+    font: "Orbitron Bold 12";
+    padding: 0px;
+}
+spacer-box {
+    content: "";
+    expand: true;
+}
+volume-row-box {
+    orientation: horizontal;
+    spacing: 0px;
+    children: [vol-left, horizontal-spacer, vol-right];
+    expand: false;
+}
+vol-left {
+    children: [textbox-vol-text];
+    expand: false;
+}
+textbox-vol-text {
+    content: "VOLUME";
+    text-color: @neon;
+    font: "Orbitron Bold 12";
+    expand: false;
+}
+horizontal-spacer {
+    expand: true;
+}
+vol-right {
+    orientation: horizontal;
+    spacing: 12px;
+    children: [textbox-control-a, textbox-vol-percent, textbox-control-d];
+    expand: false;
+}
+textbox-control-a {
+    content: "A";
+    text-color: @accent;
+    padding: 4px 12px;
+    border: 1px solid;
+    border-color: @accent;
+    background-color: @darkCyan;
+    font: "Orbitron 10";
+    expand: false;
+}
+textbox-vol-percent {
+    content: "00%";
+    text-color: @accent;
+    font: "Orbitron Bold 14";
+    expand: false;
+}
+textbox-control-d {
+    content: "D";
+    text-color: @accent;
+    padding: 4px 12px;
+    border: 1px solid;
+    border-color: @accent;
+    background-color: @darkCyan;
+    font: "Orbitron 10";
+    expand: false;
+}
+listview {
+    columns: 1;
+    lines: 8;
+    spacing: 3px;
+    background-color: transparent;
+    expand: true;
+}
+element {
+    padding: 12px 14px;
+    border: 1px solid;
+    border-color: transparent;
+    background-color: transparent;
+}
+element alternate {
+    background-color: #1a1a1a88;
+}
+element selected {
+    background-color: #0a3a3acc;
+    text-color: @accent;
+    border: 1px solid;
+    border-color: @accent;
+    font: "Orbitron Bold 13";
+}
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    font: "Orbitron Bold 12";
+}
+element-text selected {
+    background-color: transparent;
+    text-color: @accent;
+}
+mode-switcher {
+    orientation: horizontal;
+    spacing: 6px;
+    padding: 6px;
+    background-color: transparent;
+    border: 1px solid;
+    border-color: @accent;
+    children: [button-window, button-drun, button-filebrowser, dummy-spacer];
+}
+
+element dummy-spacer {
+    expand: true;
+    background-color: transparent;
+    border: none;
+}
+textbox spacer-mode {
+    content: "";
+    expand: true;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+button {
+    padding: 6px 12px;
+    background-color: transparent;
+    border: 1px solid;
+    border-color: @accent;
+    text-color: @accent;
+    font: "Orbitron Bold 11";
+    expand: false;
+}
+button selected {
+    background-color: @accent;
+    text-color: #0a0a0a;
+    border: 1px solid;
+    border-color: @accent;
+}
+button-window {
+}
+button-drun {
+}
+button-filebrowser {
+}

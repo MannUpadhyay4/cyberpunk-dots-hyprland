@@ -1,0 +1,131 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/json_schema.json",
+    "logo": {
+        "type": "file",
+        "source": "~/.config/fastfetch/ascii.txt",
+        "padding": {
+            "top": 1,
+            "right": 2,
+            "left": 2,
+            "bottom": 1
+        }
+    },
+    "modules": [
+        "break",
+        "break",
+        "break",
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█████████████████████████████████████████████████████████████████████████████\u001b[0m"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█\u001b[0m\u001b[1;37;41m MEDTECH BIOSCAN v2.1 - NEURAL INTERFACE DIAGNOSTIC \u001b[0m\u001b[1;31m████████████████████████\u001b[0m"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█████████████████████████████████████████████████████████████████████████████\u001b[0m"
+        },
+        "break",
+        {
+            "type": "host",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mRIG MODEL    \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;36m{2}\u001b[0m"
+        },
+        {
+            "type": "gpu",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mOPTIC PROC   \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;36m{2}\u001b[0m"
+        },
+        {
+            "type": "cpu",
+            "key": "\u001b[1;36m▓▓▓▓▓▓SYSTEM VITALS▓▓▓▓▓▓▓▓▓▓▓▓▓\u001b[0m\u001b[1;31m▌\u001b[1;37mCPU CORE     \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;36m{1} @ {7} GHz\u001b[0m"
+        },
+        {
+            "type": "memory",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mRAM MODULE   \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;36m{1} / {2} \u001b[1;33m({3})\u001b[0m"
+        },
+        {
+            "type": "disk",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mDATA STORAGE \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;36m{1} / {2} \u001b[1;33m({9})\u001b[0m"
+        },
+        "break",
+        {
+            "type": "os",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mOS VERSION   \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;35m{2} {12}\u001b[0m"
+        },
+        {
+            "type": "kernel",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mKERNEL       \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;35m{1} {2}\u001b[0m"
+        },
+        {
+            "type": "packages",
+            "key": "\u001b[1;33m▓▓▓▓▓▓ \u001b[1;35mNEURAL INTERFACE\u001b[1;33m ▓▓▓▓▓▓▓▓\u001b[0m\u001b[1;31m▌\u001b[1;37mSOFTWARE     \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;35m{} packages installed\u001b[0m"
+        },
+        {
+            "type": "shell",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mTERM SHELL   \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;35m{4} {6}\u001b[0m"
+        },
+        {
+            "type": "display",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mDISPLAY      \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;35m{1}x{2} @ {5} Hz\u001b[0m"
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mDESKTOP ENV  \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;32m{1}\u001b[0m"
+        },
+        {
+            "type": "terminal",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mTERM CLIENT  \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;32m{3} {4}\u001b[0m"
+        },
+        {
+            "type": "uptime",
+            "key": "\u001b[1;33m▓▓▓▓▓▓ \u001b[1;32mBIO READINGS\u001b[1;33m ▓▓▓▓▓▓▓▓▓▓▓▓\u001b[0m\u001b[1;31m▌\u001b[1;37mSYSTEM TIME  \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;32m{1}d {2}h {3}m online\u001b[0m"
+        },
+        {
+            "type": "datetime",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mTIMESTAMP    \u001b[1;33m│\u001b[0m ",
+            "format": "\u001b[1;32m2077.{2}.{3} [{4}:{5}:{6}]\u001b[0m"
+        },
+        {
+            "type": "localip",
+            "key": "                                \u001b[1;31m▌\u001b[1;37mNET ADDRESS  \u001b[1;33m│\u001b[0m "
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█████████████████████████████████████████████████████████████████████████████\u001b[0m"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█\u001b[0m               \u001b[5;33mSTATUS: \u001b[1;32mNEURAL LINK STABLE\u001b[0m - \u001b[1;36mBIOSCAN COMPLETE\u001b[0m               \u001b[1;31m█\u001b[0m"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█\u001b[0m                \u001b[1;37mWARNING: \u001b[1;33mFOREIGN NEURAL PATTERNS DETECTED\u001b[0m                  \u001b[1;31m█\u001b[0m"
+
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[1;31m█████████████████████████████████████████████████████████████████████████████\u001b[0m"
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[1;90m                     >>> MEDTECH DIAGNOSTICS COMPLETE <<<\u001b[0m"
+        }
+    ]
+}
